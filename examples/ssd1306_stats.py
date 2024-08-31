@@ -9,19 +9,31 @@
 import time
 import subprocess
 
-from board import SCL, SDA
-import busio
+import board
+import digitalio
 from PIL import Image, ImageDraw, ImageFont
 import adafruit_ssd1306
 
+# Change these
+# to the right size for your display!
+WIDTH = 128
+HEIGHT = 64  # Change to 64 if needed
 
 # Create the I2C interface.
-i2c = busio.I2C(SCL, SDA)
+#i2c = board.I2C()
 
 # Create the SSD1306 OLED class.
 # The first two parameters are the pixel width and pixel height.  Change these
 # to the right size for your display!
-disp = adafruit_ssd1306.SSD1306_I2C(128, 32, i2c)
+#disp = adafruit_ssd1306.SSD1306_I2C(WIDTH, HEIGHT, i2c)
+
+# Use for SPI
+spi = board.SPI()
+#disp_cs = digitalio.DigitalInOut(board.CS)
+disp_cs = None;
+disp_dc = digitalio.DigitalInOut(board.D18)
+disp_reset = digitalio.DigitalInOut(board.D22)
+disp = adafruit_ssd1306.SSD1306_SPI(WIDTH, HEIGHT, spi, disp_dc, disp_reset, disp_cs)
 
 # Clear display.
 disp.fill(0)
@@ -74,9 +86,9 @@ while True:
     # Write four lines of text.
 
     draw.text((x, top + 0), "IP: " + IP, font=font, fill=255)
-    draw.text((x, top + 8), "CPU load: " + CPU, font=font, fill=255)
-    draw.text((x, top + 16), MemUsage, font=font, fill=255)
-    draw.text((x, top + 25), Disk, font=font, fill=255)
+    draw.text((x, top + 16), "CPU load: " + CPU, font=font, fill=255)
+    draw.text((x, top + 32), MemUsage, font=font, fill=255)
+    draw.text((x, top + 48), Disk, font=font, fill=255)
 
     # Display image.
     disp.image(image)

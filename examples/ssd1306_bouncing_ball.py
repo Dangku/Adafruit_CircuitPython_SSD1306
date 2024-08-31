@@ -2,17 +2,29 @@
 # SPDX-License-Identifier: MIT
 
 import board
-import busio
+import digitalio
 import adafruit_ssd1306
 
+# Change these
+# to the right size for your display!
+WIDTH = 128
+HEIGHT = 64  # Change to 64 if needed
+
 # Create the I2C interface.
-i2c = busio.I2C(board.SCL, board.SDA)
+#i2c = board.I2C()
 
 # Create the SSD1306 OLED class.
 # The first two parameters are the pixel width and pixel height.  Change these
 # to the right size for your display!
-oled = adafruit_ssd1306.SSD1306_I2C(128, 32, i2c)
+#oled = adafruit_ssd1306.SSD1306_I2C(WIDTH, HEIGHT, i2c)
 
+# Use for SPI
+spi = board.SPI()
+#oled_cs = digitalio.DigitalInOut(board.CS)
+oled_cs = None;
+oled_dc = digitalio.DigitalInOut(board.D18)
+oled_reset = digitalio.DigitalInOut(board.D22)
+oled = adafruit_ssd1306.SSD1306_SPI(WIDTH, HEIGHT, spi, oled_dc, oled_reset, oled_cs)
 
 # Helper function to draw a circle from a given position with a given radius
 # This is an implementation of the midpoint circle algorithm,
