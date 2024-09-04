@@ -7,7 +7,8 @@
 # Import all board pins.
 import time
 import board
-import busio
+
+# import busio
 from digitalio import DigitalInOut
 
 # Import the SSD1306 module.
@@ -22,19 +23,19 @@ HEIGHT = 64  # Change to 64 if needed
 reset_pin = DigitalInOut(board.D22)
 
 # Create the I2C interface.
-#i2c = busio.I2C(board.SCL, board.SDA)
+# i2c = busio.I2C(board.SCL, board.SDA)
 
 # Create the SSD1306 OLED class.
 # The first two parameters are the pixel width and pixel height.  Change these
 # to the right size for your display!
 # The I2C address for these displays is 0x3d or 0x3c, change to match
 # A reset line may be required if there is no auto-reset circuitry
-#display = adafruit_ssd1306.SSD1306_I2C(WIDTH, HEIGHT, i2c, addr=0x3C, reset=reset_pin)
+# display = adafruit_ssd1306.SSD1306_I2C(WIDTH, HEIGHT, i2c, addr=0x3C, reset=reset_pin)
 
 # Use for SPI
 spi = board.SPI()
-#cs_pin = DigitalInOut(board.CS)
-cs_pin = None;
+# cs_pin = DigitalInOut(board.CS)
+cs_pin = None
 dc_pin = DigitalInOut(board.D18)
 display = adafruit_ssd1306.SSD1306_SPI(WIDTH, HEIGHT, spi, dc_pin, reset_pin, cs_pin)
 

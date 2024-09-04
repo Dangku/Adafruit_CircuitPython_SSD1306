@@ -14,18 +14,18 @@ WIDTH = 128
 HEIGHT = 64  # Change to 64 if needed
 
 # Create the I2C bus interface.
-#i2c = board.I2C()  # uses board.SCL and board.SDA
+# i2c = board.I2C()  # uses board.SCL and board.SDA
 # i2c = busio.I2C(board.GP1, board.GP0)    # Pi Pico RP2040
 
 # Create the SSD1306 OLED class.
-#display = adafruit_ssd1306.SSD1306_I2C(WIDTH, HEIGHT, i2c)
+# display = adafruit_ssd1306.SSD1306_I2C(WIDTH, HEIGHT, i2c)
 # You can change the I2C address with an addr parameter:
 # display = adafruit_ssd1306.SSD1306_I2C(WIDTH, HEIGHT, i2c, addr=0x31)
 
 # Use for SPI
 spi = board.SPI()
-#cs = digitalio.DigitalInOut(board.CS)
-cs = None;
+# cs = digitalio.DigitalInOut(board.CS)
+cs = None
 dc = digitalio.DigitalInOut(board.D18)
 reset = digitalio.DigitalInOut(board.D22)
 display = adafruit_ssd1306.SSD1306_SPI(WIDTH, HEIGHT, spi, dc, reset, cs)

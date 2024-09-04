@@ -7,7 +7,8 @@
 
 import board
 from digitalio import DigitalInOut, Direction, Pull
-#import digitalio
+
+# import digitalio
 from PIL import Image, ImageDraw
 import adafruit_ssd1306
 
@@ -17,17 +18,17 @@ WIDTH = 128
 HEIGHT = 64  # Change to 64 if needed
 
 # Create the I2C interface.
-#i2c = board.I2C()
+# i2c = board.I2C()
 # Create the SSD1306 OLED class.
-#disp = adafruit_ssd1306.SSD1306_I2C(WIDTH, HEIGHT, i2c)
+# disp = adafruit_ssd1306.SSD1306_I2C(WIDTH, HEIGHT, i2c)
 
 # Use for SPI
 spi = board.SPI()
-#cs = DigitalInOut(board.CS)
-cs = None;
+# cs = DigitalInOut(board.CS)
+cs = None
 dc = DigitalInOut(board.D18)
 reset = DigitalInOut(board.D22)
-oled = adafruit_ssd1306.SSD1306_SPI(WIDTH, HEIGHT, spi, dc, reset, cs)
+disp = adafruit_ssd1306.SSD1306_SPI(WIDTH, HEIGHT, spi, dc, reset, cs)
 
 # Input pins:
 button_A = DigitalInOut(board.D5)
